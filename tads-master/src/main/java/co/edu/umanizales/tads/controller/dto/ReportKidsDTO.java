@@ -8,7 +8,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class ReportKidsDTO {
-    private String city;
     private List<KidGenderDTO> genders;
     private int total;
 }

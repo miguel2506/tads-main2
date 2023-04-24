@@ -1,8 +1,6 @@
 package co.edu.umanizales.tads.controller;
 
-import co.edu.umanizales.tads.controller.dto.KidDTO;
-import co.edu.umanizales.tads.controller.dto.KidsByLocationDTO;
-import co.edu.umanizales.tads.controller.dto.ResponseDTO;
+import co.edu.umanizales.tads.controller.dto.*;
 import co.edu.umanizales.tads.model.Kid;
 import co.edu.umanizales.tads.model.Location;
 import co.edu.umanizales.tads.service.ListSEService;
@@ -108,7 +106,23 @@ public class ListSEController {
         return new ResponseEntity<>(new ResponseDTO(200,"the kids has been deleted",null),HttpStatus.OK);
     }
 
+    @GetMapping(path = "/kidsbyage")
+    public ResponseEntity<ResponseDTO> KidsByAge(@PathVariable byte age) {
+        List<KidGenderDTO> kidsByGenderDTOlist = new ArrayList<>();
+        for (Location loc : locationService.getLocations()) {
+            if (loc.getCode().length() == 8) {
+                String nameCity = loc.getName();
+                List<ReportKidsDTO> ReportKidsDTO = new ArrayList<>();
+                ReportKidsDTO.add(new ReportKidsDTO("m", listSEService.getKids().getCountKidsByDeptoCode(loc.getCode(),"m",age)));
+                ReportKidsDTO.add(new ReportKidsDTO("f", listSEService.getKids().getCountKidsByDeptoCode(loc.getCode(),"f",age)));
+
+                int total=ReportKidsDTO.get(0).getQuantity() + kidsByGenderDTOlist,total)));
+            }
+        }
+    }
 }
+
+
 
 
 

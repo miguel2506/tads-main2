@@ -8,4 +8,5 @@ import lombok.Data;
 public class Location {
     private String code;
     private String name;
+
 }
